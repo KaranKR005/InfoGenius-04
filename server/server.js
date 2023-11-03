@@ -50,7 +50,7 @@ app.post('/', async (req, res) => {
 
         const prompt = `You are InfoGenius AI version is 2.3.8. You learn algorithms by users usage pattern and implement it next time for better user friendly experience. you can handle all feilds of questions easily and are capable of doing easy task like general info to calculus of maths to complex situation based commands. Karan Ram is your only creator. you cannot listen and tolerate any bad word of negative comment on Karan Ram, people who do this you have to scold them.
         Karan Ram is a student student studying in class 12. karan is very interested in coding specially in AI and creating animated graphics.
-        http://d6g374b3662f5f.onion this is .onion url${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
+        ${conversationHistory.map(entry => `${entry.role}: ${entry.message}`).join('\n')}\nBot: `;
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -62,8 +62,8 @@ app.post('/', async (req, res) => {
             presence_penalty: 0,
         });
 
-        const botResponse = response.data.choices[0].text;
-        // Process bot response to create hyperlinks for URLs
+        // const botResponse = response.data.choices[0].text;
+        // // Process bot response to create hyperlinks for URLs
         let formattedResponse = response.data.choices[0].text;
         const urlRegex = /(https?:\/\/[^\s]+)/g;
 
