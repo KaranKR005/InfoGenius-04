@@ -2,8 +2,8 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
-import pkg from 'mongodb';
-const { MongoClient } = pkg;
+// import pkg from 'mongodb';
+// const { MongoClient } = pkg;
 
 const conversationHistory = [];
 
@@ -21,16 +21,16 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection
-const client = new MongoClient(process.env.MONGODB_URL, {
-    useNewUrlParser: true, // Deprecated option
-    useUnifiedTopology: true, // Deprecated option
-});
+// const client = new MongoClient(process.env.MONGODB_URL, {
+//     useNewUrlParser: true, // Deprecated option
+//     useUnifiedTopology: true, // Deprecated option
+// });
 
-client.connect().then(() => {
-    console.log('Connected to Database');
-}).catch(error => {
-    console.error('Error connecting to MongoDB:', error);
-});
+// client.connect().then(() => {
+//     console.log('Connected to Database');
+// }).catch(error => {
+//     console.error('Error connecting to MongoDB:', error);
+// });
 
 app.get('/', async (req, res) => {
     res.status(200).send({
@@ -71,17 +71,17 @@ app.post('/', async (req, res) => {
         formattedResponse = formattedResponse.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
 
 
-        // Store the generated response in the chatData object
-        const chatData = {
-            user: userMessage,
-            bot: formattedResponse,
-            timestamp: new Date(),
-        };
+        // // Store the generated response in the chatData object
+        // const chatData = {
+        //     user: userMessage,
+        //     bot: formattedResponse,
+        //     timestamp: new Date(),
+        // };
 
-        // Store chat data in MongoDB
-        const database = client.db('ChatDB');
-        const collection = database.collection('ChatHistory');
-        await collection.insertOne(chatData);
+        // // Store chat data in MongoDB
+        // const database = client.db('ChatDB');
+        // const collection = database.collection('ChatHistory');
+        // await collection.insertOne(chatData);
 
         conversationHistory.push({ role: 'bot', message: formattedResponse });
 
