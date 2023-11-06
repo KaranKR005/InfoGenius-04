@@ -46,7 +46,7 @@ app.post('/', async (req, res) => {
     try {
         const userMessage = req.body.prompt;
 
-        const istTime = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
+        const istTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
         conversationHistory.push({ role: 'user', message: userMessage });
 
